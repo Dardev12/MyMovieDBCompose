@@ -2,12 +2,15 @@ package com.dardev.mycomposemovie.data.remote.dto
 
 import com.dardev.mycomposemovie.domain.model.MovieItem
 import com.dardev.mycomposemovie.domain.model.MovieReponse
+import com.google.gson.annotations.SerializedName
 
 data class MoviesDTO(
-    val page: Int,
+    val page: String,
     val results: List<Result>,
-    val total_pages: Int,
-    val total_results: Int
+    @SerializedName("total_pages")
+    val totalPages: Int,
+    @SerializedName("total_results")
+    val totalResults: Int
 )
 
 fun MoviesDTO.toMovieReponse():MovieReponse{
@@ -19,7 +22,7 @@ fun MoviesDTO.toMovieReponse():MovieReponse{
         }
     }
     return MovieReponse(
-        page=page.toString(),
+        page=page,
         results = listMovieItem,
     )
 }

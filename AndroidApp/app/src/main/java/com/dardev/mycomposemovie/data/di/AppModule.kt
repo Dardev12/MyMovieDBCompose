@@ -2,6 +2,8 @@ package com.dardev.mycomposemovie.data.di
 
 import com.dardev.mycomposemovie.common.Constants
 import com.dardev.mycomposemovie.data.remote.MovieDBApi
+import com.dardev.mycomposemovie.data.repository.ComposeMovieRepository
+import com.dardev.mycomposemovie.domain.repository.IComposeMovieRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +26,10 @@ object AppModule {
             .create(MovieDBApi::class.java)
     }
 
-
+    @Provides
+    @Singleton
+    fun provideComposeMovieRepository(api:MovieDBApi):IComposeMovieRepository{
+        return ComposeMovieRepository(api)
+    }
 
 }
